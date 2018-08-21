@@ -25,7 +25,11 @@ func NewStack(stackSize int) *stack {
 	}
 }
 
-func (s *stack) push(d data) error {
+func (s *stack) Size() int {
+	return s.size
+}
+
+func (s *stack) Push(d data) error {
 	if s.size >= s.stackSize {
 		return ErrStackOverflow
 	}
@@ -36,7 +40,7 @@ func (s *stack) push(d data) error {
 	return nil
 }
 
-func (s *stack) pop() (d data, err error) {
+func (s *stack) Pop() (d data, err error) {
 	if s.size <= 0 {
 		err = ErrStackUnderflow
 		return
@@ -48,7 +52,7 @@ func (s *stack) pop() (d data, err error) {
 	return
 }
 
-func (s *stack) peek() (d data, err error) {
+func (s *stack) Peek() (d data, err error) {
 	if s.size <= 0 {
 		err = ErrStackUnderflow
 		return
