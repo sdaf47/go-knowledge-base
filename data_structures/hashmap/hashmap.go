@@ -8,24 +8,16 @@ import (
 )
 
 type HashFunc func(blockSize int, key Key) int
-
 type Key interface{}
-
-type Statistic struct {
-	collisionCnt  int
-	allocationCnt int
-}
 
 var (
 	ErrInvalidKey = errors.New("key_error")
-	ErrCollision  = errors.New("collision_error")
 )
 
 type HashMapper interface {
 	Set(key Key, value interface{}) error
 	Get(key Key) (value interface{}, err error)
 	Unset(key Key) error
-	Statistic() Statistic
 	Count() int
 }
 
@@ -40,8 +32,6 @@ type hashMapper struct {
 	hash      HashFunc
 	blockSize int
 	count     int
-
-	stat Statistic
 }
 
 func hash(blockSize int, key Key) int {
@@ -83,8 +73,6 @@ func (hm *hashMapper) malloc(size int) {
 	}
 
 	hm.data = nd
-
-	hm.stat.allocationCnt++
 }
 
 func NewHashMap(blockSize int, fn HashFunc) (hm HashMapper) {
@@ -113,7 +101,6 @@ func (hm *hashMapper) Set(key Key, value interface{}) (err error) {
 				break
 			}
 			if item.next == nil {
-				hm.stat.collisionCnt++
 				item.next = &entry{key, value, nil}
 				hm.count++
 				break
@@ -171,8 +158,4 @@ func (hm *hashMapper) Unset(key Key) (err error) {
 
 func (hm *hashMapper) Count() (cnt int) {
 	return hm.count
-}
-
-func (hm *hashMapper) Statistic() Statistic {
-	return hm.stat
 }
