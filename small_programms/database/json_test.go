@@ -55,3 +55,25 @@ func TestDataJsonBase_Create(t *testing.T) {
 		}
 	}
 }
+
+func TestDataJsonBase_Update(t *testing.T) {
+	jsonDataBase.Create(TestField2{
+		Name: "test_1",
+	})
+
+	newName := "tttt"
+	err := jsonDataBase.Update(0, TestField2{
+		Name: newName,
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	tf, err := jsonDataBase.GetOne(0, TestField2{})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if tf.(TestField2).Name != newName {
+		t.Fatal("update: name not changed")
+	}
+}
