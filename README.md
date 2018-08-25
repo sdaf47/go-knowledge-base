@@ -9,5 +9,5 @@ This is my own base, and i do what i want.
 - [JSON Database service](https://github.com/sdaf47/go-knowledge-base/blob/master/small_programms/database/json.go)
 **#reflection** **#json** **#files**
 
-- [JSON Database service](https://github.com/sdaf47/go-knowledge-base/blob/master/small_programms/task)
+- [Task Manager service](https://github.com/sdaf47/go-knowledge-base/blob/master/small_programms/task)
 **#docker** **#rest** **#go-kit**
