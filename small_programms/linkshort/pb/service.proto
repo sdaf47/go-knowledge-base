@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+package pb;
+
+service ShortLinkService {
+  rpc Encode (EncodeRequest) returns (EncodeReply) {}
+  rpc Decode (DecodeRequest) returns (DecodeReply) {}
+}
+
+message EncodeRequest {
+  string Link = 1;
+}
+
+message EncodeReply {
+  string Code = 1;
+  string Error = 2;
+  string Status = 3;
+}
+
+message DecodeRequest {
+  string Code = 1;
+}
+
+message DecodeReply {
+  string Link = 1;
+  string Error = 2;
+  string Status = 3;
+}
