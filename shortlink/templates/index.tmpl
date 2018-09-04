@@ -1,0 +1,10 @@
+<html>
+	<h1>
+		Make your link short
+	</h1>
+	<form method="post" action="/">
+	  <input name="link" value="{{ .link }}" /><br/>
+	  <span><a href="{{ .short_link }}">{{ .short_link }}</a> ← copy your short link </span><br/>
+	  <input value="MAKE NOW" type="submit"/>
+	</form>
+</html>

@@ -9,17 +9,21 @@ import (
 	"github.com/sdaf47/go-knowledge-base/small_programms/linkshort/pb"
 	"net"
 	"google.golang.org/grpc"
+	"fmt"
 )
 
 func main() {
+	fmt.Println("Short link server starting . . . ")
 	redisClient := redis.NewClient(&redis.Options{
-		//Addr:     getStrParam("REDIS_ADDR"),
-		//Password: getStrParam("REDIS_PASSWORD"),
-		//DB:       getIntParam("REDIS_DB"),
-		Addr:     "localhost:6379",
-		Password: "",
-		DB:       0,
+		Addr:     getStrParam("REDIS_ADDR"),
+		Password: getStrParam("REDIS_PASSWORD"),
+		DB:       getIntParam("REDIS_DB"),
 	})
+
+	err := redisClient.Keys("**").Err()
+	if err != nil {
+		panic(err)
+	}
 
 	srv, err := service.New(redisClient)
 	if err != nil {
@@ -27,7 +31,7 @@ func main() {
 	}
 
 	grpcServer := transport.NewGRPCServer(srv)
-	grpcListener, err := net.Listen("tcp", ":8080")
+	grpcListener, err := net.Listen("tcp", getStrParam("SHORT_LINK_ADDR"))
 	if err != nil {
 		panic(err)
 	}
@@ -35,6 +39,7 @@ func main() {
 	server := grpc.NewServer()
 	pb.RegisterShortLinkServiceServer(server, grpcServer)
 
+	fmt.Println("Short link server started.")
 	server.Serve(grpcListener)
 }
 

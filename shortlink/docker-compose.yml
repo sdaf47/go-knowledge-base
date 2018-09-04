@@ -1,0 +1,22 @@
+version: '3'
+services:
+  shortlinkweb:
+    build: ./cmd/shortlinkweb/.
+    ports:
+      - "8000:8000"
+    depends_on:
+      - "redis"
+  shortlinkserver:
+    env_file:
+      - ./cmd/shortlinkserver/.env
+    build: ./cmd/shortlinkserver/.
+    ports:
+      - "8080:8080"
+    depends_on:
+      - "redis"
+  redis:
+    image: redis:3.2-alpine
+    volumes:
+      - redis_data:/data
+volumes:
+  redis_data:
