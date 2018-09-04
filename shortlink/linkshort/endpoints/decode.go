@@ -3,7 +3,7 @@ package endpoints
 import (
 	"github.com/go-kit/kit/endpoint"
 	"context"
-	"github.com/sdaf47/go-knowledge-base/small_programms/linkshort/service"
+	"github.com/sdaf47/go-knowledge-base/shortlink/linkshort/service"
 )
 
 type DecodeRequest struct {

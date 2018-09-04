@@ -1,7 +1,7 @@
 package service
 
 import (
-	"github.com/sdaf47/go-knowledge-base/small_programms/linkshort/database"
+	"github.com/sdaf47/go-knowledge-base/shortlink/linkshort/database"
 	"github.com/minio/highwayhash"
 	"github.com/go-redis/redis"
 	"encoding/hex"

@@ -4,7 +4,7 @@ import (
 	"net/http"
 	"github.com/gin-gonic/gin"
 	"google.golang.org/grpc"
-	"github.com/sdaf47/go-knowledge-base/small_programms/linkshort/transport"
+	"github.com/sdaf47/go-knowledge-base/shortlink/linkshort/transport"
 )
 
 func main() {

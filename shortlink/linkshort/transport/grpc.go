@@ -1,10 +1,10 @@
 package transport
 
 import (
-	"github.com/sdaf47/go-knowledge-base/small_programms/linkshort/service"
-	"github.com/sdaf47/go-knowledge-base/small_programms/linkshort/pb"
+	"github.com/sdaf47/go-knowledge-base/shortlink/linkshort/service"
+	"github.com/sdaf47/go-knowledge-base/shortlink/linkshort/pb"
 	grpctransport "github.com/go-kit/kit/transport/grpc"
-	"github.com/sdaf47/go-knowledge-base/small_programms/linkshort/endpoints"
+	"github.com/sdaf47/go-knowledge-base/shortlink/linkshort/endpoints"
 	"context"
 	oldcontext "golang.org/x/net/context"
 	"github.com/go-kit/kit/endpoint"
