@@ -8,5 +8,5 @@
 cd ./small_programms/cmd/task
 docker build -t task-manager .
 
-docker -it -P task-manager
+docker run -it -P task-manager
 ```
