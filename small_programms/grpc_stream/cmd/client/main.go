@@ -13,15 +13,15 @@ import (
 )
 
 func main() {
-	//conn, err := grpc.Dial("[::]:1024", grpc.WithInsecure())
-	conn, err := grpc.Dial(":9981", grpc.WithInsecure())
+	address := read("Address: ") // [::]:1024
+	username := read("Your name: ")
+	password := read("Password: ")
+
+	conn, err := grpc.Dial(address, grpc.WithInsecure())
 	if err != nil {
 		panic(err)
 	}
-
 	client := stream.NewMessageBrokerClient(conn)
-	username := read("Your name: ")
-	password := read("Password: ")
 
 	status, err := client.Subscribe(context.Background(), &stream.Logon{
 		Username: username,
@@ -87,7 +87,7 @@ func main() {
 
 		history.Append(tui.NewHBox(
 			tui.NewLabel(time.Now().Format("15:04:05")),
-			tui.NewPadder(1, 0, tui.NewLabel(fmt.Sprintf("%14s", msg.Username))),
+			tui.NewPadder(1, 0, tui.NewLabel(fmt.Sprintf("%14s: ", msg.Username))),
 			tui.NewLabel(msg.Message),
 			tui.NewSpacer(),
 		))
