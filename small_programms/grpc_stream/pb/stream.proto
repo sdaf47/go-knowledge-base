@@ -1,0 +1,34 @@
+syntax = "proto3";
+
+import "google/protobuf/timestamp.proto";
+
+service MessageBroker {
+    rpc Subscribe (Logon) returns (LogonStatus);
+    rpc OpenStream (stream Request) returns (stream Message);
+}
+
+message Timestamp {
+    int64 Seconds = 1;
+    int32 Nanos = 2;
+}
+
+message Logon {
+    string username = 1;
+    string password = 2;
+}
+
+message LogonStatus {
+    bool success = 1;
+    string token = 2;
+    string error = 3;
+}
+
+message Message {
+    google.protobuf.Timestamp timestamp = 1;
+    string username = 2;
+    string message = 3;
+}
+
+message Request {
+    string message = 3;
+}
