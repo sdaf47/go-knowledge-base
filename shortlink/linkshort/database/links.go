@@ -1,6 +1,7 @@
 package database
 
 import (
+	"context"
 	"github.com/go-redis/redis"
 )
 
@@ -22,7 +23,7 @@ func New(db *redis.Client) LinkRepo {
 }
 
 func (repo *linkRepo) Create(code, link string) (err error) {
-	_, err = repo.db.Set(code, link, RedisExpire).Result()
+	_, err = repo.db.Set(context.Background(), code, link, RedisExpire).Result()
 	if err != nil {
 		return
 	}
@@ -31,5 +32,5 @@ func (repo *linkRepo) Create(code, link string) (err error) {
 }
 
 func (repo *linkRepo) Link(code string) (link string, err error) {
-	return repo.db.Get(code).Result()
+	return repo.db.Get(context.Background(), code).Result()
 }
